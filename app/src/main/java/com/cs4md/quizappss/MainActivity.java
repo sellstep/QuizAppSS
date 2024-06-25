@@ -2,19 +2,15 @@ package com.cs4md.quizappss;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Question q1, q2, q3, q4, q5, currentQuestion;
     Question[] questions;
     int currentIndex;
-    Image swIMG;
+    ImageView swIMG;
+    Drawable drawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
         currentIndex = 0;
         currentQuestion = questions[currentIndex];
         questionTV.setText(currentQuestion.getqText());
-        //swIMG = (android.widget.ImageView) findViewById(R.id.swImg);
+        swIMG = (ImageView) findViewById(R.id.swImg);
+        //swIMG.setImageResource(R.drawable.yourimagename);
+        //ImageView imgView=(ImageView) findViewById(R.id.imgView);
+        //Drawable  drawable  = getResources().getDrawable(R.drawable.img);
+       // imgView.setImageDrawable(drawable);
 
         // 3. what happens when user interacts with application
         trueBTN.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +96,34 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 currentIndex++;
+                int tempImageNum = currentQuestion.getImageNum();
+                swIMG.setImageResource(tempImageNum);
+                //swIMG.setImageDrawable();
+                /*
+                switch (currentIndex){
+
+                    case 0:
+                        swIMG.setImageResource(R.drawable.question_one);
+                        break;
+                    case 1:
+                        swIMG.setImageResource(R.drawable.question_two);
+                        break;
+                    case 2:
+                        swIMG.setImageResource(R.drawable.question_three);
+                        break;
+                    case 3:
+                        swIMG.setImageResource(R.drawable.question_four);
+                        break;
+                    case 4:
+                        swIMG.setImageResource(R.drawable.question_five);
+                        break;
+                    default:
+                        swIMG.setImageResource(R.drawable.question_five);
+                        //throw new IllegalStateException("Unexpected value: " + currentIndex);
+                }
+                */
+
+
                 if( currentIndex < questions.length){
                     //advance and show next question
                     currentQuestion = questions[currentIndex];
@@ -119,10 +148,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setQuestions(){
-        q1 = new Question(getString(R.string.q1_text), true);
-        q2 = new Question(getString(R.string.q2_text), true);
-        q3 = new Question(getString(R.string.q3_text), true);
-        q4 = new Question(getString(R.string.q4_text), false);
-        q5 = new Question(getString(R.string.q5_text), true);
+        q1 = new Question(getString(R.string.q1_text), true, R.drawable.question_one);
+        q2 = new Question(getString(R.string.q2_text), true, R.drawable.question_two);
+        q3 = new Question(getString(R.string.q3_text), true, R.drawable.question_three);
+        q4 = new Question(getString(R.string.q4_text), false, R.drawable.question_four);
+        q5 = new Question(getString(R.string.q5_text), true, R.drawable.question_five);
     }
 }
