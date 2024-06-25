@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">QuizAppSS</string>
+    <string name="email_btn_text">Send Score to Your Friends!</string>
+    <string name="true_btn_text">TRUE</string>
+    <string name="q1_text">The first Star Wars movie to be released was episode 4.</string>
+    <string name="q2_text">Luke and Leia are twins</string>
+    <string name="q3_text">At the end of Rogue One , all the main characters die.</string>
+    <string name="q4_text">Rey and Kylo Ren are brother and sister.</string>
+    <string name="q5_text">Darth Vader and Anakin Skywalker are the same person.</string>
+    <string name="false_btn_text">FALSE</string>
+    <string name="next_text">NEXT</string>
+    <string name="empty_text">empty</string>
+    <string name="current_score_text">Current Score:</string>
+    <string name="blank_text">blank</string>
+    <string name="correct_text">Correct!</string>
+    <string name="incorrect_text">Incorrect!</string>
+    <string name="look_at_my_score_text">Look at my score!</string>
+    <string name="email_body_fragment_1">"I got "</string>
+    <string name="email_body_fragment_2">" on the Star Wars quiz!"</string>
 </resources>

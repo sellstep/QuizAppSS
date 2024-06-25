@@ -11,14 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scoreTV"
-        android:text="Current Score:"
+        android:text="@string/current_score_text"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scoreValueTV"
-        android:text="blank"
+        android:text="@string/blank_text"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailBTN"
+        android:text="@string/email_btn_text"
+        android:textSize="32px"
         />
 
 </LinearLayout>
