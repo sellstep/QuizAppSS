@@ -62,6 +62,7 @@ public class ScoreActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+
     }
 
 

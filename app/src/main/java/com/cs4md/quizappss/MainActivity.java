@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         trueBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                falseBTN.setEnabled(false);
                 if(currentQuestion.isCorrectAnswer()){
                     score++;
                     message = getString(R.string.correct_text);
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         falseBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                trueBTN.setEnabled(false);
                 if(!currentQuestion.isCorrectAnswer()){
                     score++;
                     message = getString(R.string.correct_text);
@@ -94,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
         nextBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                falseBTN.setEnabled(true);
+                trueBTN.setEnabled(true);
                 currentIndex++;
                 int tempImageNum = currentQuestion.getImageNum();
                 swIMG.setImageResource(tempImageNum);
