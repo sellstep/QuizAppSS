@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button trueBTN;
     Button falseBTN;
     Button nextBTN;
-    TextView questionTV;
+    TextView questionTV, previousScoreTV;
     Toast myToast;
     int score;
     String message;
@@ -27,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
     Question[] questions;
     int currentIndex;
     ImageView swIMG;
-    Drawable drawable;
+    private SharedPreferences mPreferences;
+    private String sharedPrefFile= "com.cs4md.android.QuizAppSS";
+    private final String PREVIOUS_SCORE_KEY = "SCORE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
         currentQuestion = questions[currentIndex];
         questionTV.setText(currentQuestion.getqText());
         swIMG = (ImageView) findViewById(R.id.swImg);
+        previousScoreTV = (TextView) findViewById(R.id.previousScoreTV);
+
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        //Read initial Value
+        int prefScore = mPreferences.getInt(PREVIOUS_SCORE_KEY, 0);
+
+        //Set the Previous Score
+        String prevScoreString = " "+ prefScore;
+        previousScoreTV.setText("Preivous Score: " + prevScoreString);
+
         //swIMG.setImageResource(R.drawable.yourimagename);
         //ImageView imgView=(ImageView) findViewById(R.id.imgView);
         //Drawable  drawable  = getResources().getDrawable(R.drawable.img);
@@ -101,7 +115,15 @@ public class MainActivity extends AppCompatActivity {
                 currentIndex++;
                 int tempImageNum = currentQuestion.getImageNum();
                 swIMG.setImageResource(tempImageNum);
+
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                preferencesEditor.putInt(PREVIOUS_SCORE_KEY, score);
+                preferencesEditor.apply();
+
+
+
                 //swIMG.setImageDrawable();
+                //swIMG.setImageResource(R.drawable.question_one);
                 /*
                 switch (currentIndex){
 

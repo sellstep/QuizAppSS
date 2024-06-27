@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/scoreTV"
         android:text="@string/current_score_text"
+        android:textSize="14pt"
         />
 
     <TextView

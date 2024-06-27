@@ -9,6 +9,7 @@ public class Question {
     public Question() {
         qText = "";
         correctAnswer = false;
+        this.imageNum = 0;
     }
 
     public Question(String qText, boolean correctAnswer, int iN) {
