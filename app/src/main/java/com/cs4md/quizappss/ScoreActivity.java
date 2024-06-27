@@ -60,7 +60,6 @@ public class ScoreActivity extends AppCompatActivity {
         intent.setType("message/rfc822");
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-
         }
 
     }

@@ -1,9 +1,10 @@
 package com.cs4md.quizappss;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     Toast myToast;
     int score;
     String message;
-    //View mainView;
     Question q1, q2, q3, q4, q5, currentQuestion;
     Question[] questions;
     int currentIndex;
@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         falseBTN = (Button) findViewById(R.id.falseBTN);
         nextBTN = (Button) findViewById(R.id.nextBTN);
         questionTV = (TextView) findViewById(R.id.questionTV);
-        //mainView = findViewById(R.id.rootView);
         score = 0;
         message = "";
+        final MediaPlayer clickSound = MediaPlayer.create(this, R.raw.question_sound1);
         setQuestions();
         questions = new Question[] {q1, q2, q3, q4, q5};
         currentIndex = 0;
@@ -61,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
         //Set the Previous Score
         String prevScoreString = " "+ prefScore;
         previousScoreTV.setText("Preivous Score: " + prevScoreString);
-
-        //swIMG.setImageResource(R.drawable.yourimagename);
-        //ImageView imgView=(ImageView) findViewById(R.id.imgView);
-        //Drawable  drawable  = getResources().getDrawable(R.drawable.img);
-       // imgView.setImageDrawable(drawable);
 
         // 3. what happens when user interacts with application
         trueBTN.setOnClickListener(new View.OnClickListener() {
@@ -113,41 +108,21 @@ public class MainActivity extends AppCompatActivity {
                 falseBTN.setEnabled(true);
                 trueBTN.setEnabled(true);
                 currentIndex++;
+                /*
+                next 2 lines of code are for the image
+                 */
                 int tempImageNum = currentQuestion.getImageNum();
                 swIMG.setImageResource(tempImageNum);
+                /*
+                next 3 lines of code are for the sound
+                 */
+                int tempSound = currentQuestion.getQuestionSound();
+                MediaPlayer questionsSound = MediaPlayer.create(MainActivity.this, tempSound);
+                Log.d("tempSound ID", "tempSound" + tempSound);
 
                 SharedPreferences.Editor preferencesEditor = mPreferences.edit();
                 preferencesEditor.putInt(PREVIOUS_SCORE_KEY, score);
                 preferencesEditor.apply();
-
-
-
-                //swIMG.setImageDrawable();
-                //swIMG.setImageResource(R.drawable.question_one);
-                /*
-                switch (currentIndex){
-
-                    case 0:
-                        swIMG.setImageResource(R.drawable.question_one);
-                        break;
-                    case 1:
-                        swIMG.setImageResource(R.drawable.question_two);
-                        break;
-                    case 2:
-                        swIMG.setImageResource(R.drawable.question_three);
-                        break;
-                    case 3:
-                        swIMG.setImageResource(R.drawable.question_four);
-                        break;
-                    case 4:
-                        swIMG.setImageResource(R.drawable.question_five);
-                        break;
-                    default:
-                        swIMG.setImageResource(R.drawable.question_five);
-                        //throw new IllegalStateException("Unexpected value: " + currentIndex);
-                }
-                */
-
 
                 if( currentIndex < questions.length){
                     //advance and show next question
@@ -155,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     questionTV.setText(currentQuestion.getqText());
                     falseBTN.setBackgroundColor(Color.parseColor("#701466"));
                     trueBTN.setBackgroundColor(Color.parseColor("#701466"));
+                    questionsSound.start();
                 }
                 else{
                     // declare and initialize intent
@@ -173,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setQuestions(){
-        q1 = new Question(getString(R.string.q1_text), true, R.drawable.question_one);
-        q2 = new Question(getString(R.string.q2_text), true, R.drawable.question_two);
-        q3 = new Question(getString(R.string.q3_text), true, R.drawable.question_three);
-        q4 = new Question(getString(R.string.q4_text), false, R.drawable.question_four);
-        q5 = new Question(getString(R.string.q5_text), true, R.drawable.question_five);
+        q1 = new Question(getString(R.string.q1_text), true, R.drawable.question_one, R.raw.question_sound2);
+        q2 = new Question(getString(R.string.q2_text), true, R.drawable.question_two, R.raw.question_sound3);
+        q3 = new Question(getString(R.string.q3_text), true, R.drawable.question_three, R.raw.question_sound4);
+        q4 = new Question(getString(R.string.q4_text), false, R.drawable.question_four, R.raw.question_sound1);
+        q5 = new Question(getString(R.string.q5_text), true, R.drawable.question_five, R.raw.question_sound6);
     }
 }
